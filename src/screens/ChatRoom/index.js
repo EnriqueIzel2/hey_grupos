@@ -6,7 +6,7 @@ import { StyleSheet, Text, View } from "react-native";
 const ChatRoom = () => {
   return (
     <View style={styles.container}>
-      <Text>Chat Room Top</Text>
+      <Text>Chat Room</Text>
     </View>
   );
 };
