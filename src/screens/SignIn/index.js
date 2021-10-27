@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
-  View,
   TouchableOpacity,
   TextInput,
   SafeAreaView,
@@ -13,6 +12,7 @@ const SignIn = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [type, setType] = useState(false);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -21,13 +21,16 @@ const SignIn = () => {
         Ajude, colabore, faça networking!
       </Text>
 
-      <TextInput
-        style={styles.input}
-        value={name}
-        onChangeText={(text) => setName(text)}
-        placeholder="Qual seu nome?"
-        placeholderTextColor="#99999B"
-      />
+      {type && (
+        <TextInput
+          style={styles.input}
+          value={name}
+          onChangeText={(text) => setName(text)}
+          placeholder="Qual seu nome?"
+          placeholderTextColor="#99999B"
+        />
+      )}
+
       <TextInput
         style={styles.input}
         value={email}
@@ -35,6 +38,7 @@ const SignIn = () => {
         placeholder="Digite seu email"
         placeholderTextColor="#99999B"
       />
+
       <TextInput
         style={styles.input}
         value={password}
@@ -43,12 +47,17 @@ const SignIn = () => {
         placeholderTextColor="#99999B"
       />
 
-      <TouchableOpacity style={styles.buttonLogin}>
-        <Text style={styles.buttonText}>Acessar</Text>
+      <TouchableOpacity
+        style={[
+          styles.buttonLogin,
+          { backgroundColor: type ? "#F53745" : "#57DD86" },
+        ]}
+      >
+        <Text style={styles.buttonText}>{type ? "Cadastrar" : "Acessar"}</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity>
-        <Text>Criar uma nova conta</Text>
+      <TouchableOpacity onPress={() => setType(!type)}>
+        <Text>{type ? "Já possuo uma conta" : "Criar uma nova conta"}</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -79,7 +88,6 @@ const styles = StyleSheet.create({
 
   buttonLogin: {
     width: "90%",
-    backgroundColor: "#121212",
     height: 50,
     justifyContent: "center",
     alignItems: "center",
