@@ -7,12 +7,61 @@ import {
   SafeAreaView,
   Platform,
 } from "react-native";
+import auth from "@react-native-firebase/auth";
+import { useNavigation } from "@react-navigation/native";
 
 const SignIn = () => {
+  const navigation = useNavigation();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [type, setType] = useState(false);
+
+  function handleLogin() {
+    if (type) {
+      if (name == "" || email == "" || password == "") {
+        console.log("Please fill all the fields");
+        return;
+      }
+
+      auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then((user) => {
+          user.user
+            .updateProfile({
+              displayName: name,
+            })
+            .then(() => {
+              navigation.goBack();
+            });
+        })
+        .catch((error) => {
+          if (error.code === "auth/email-already-in-use") {
+            console.log("That email address is already in use!");
+          }
+
+          if (error.code === "auth/invalid-email") {
+            console.log("That email address is invalid!");
+          }
+        });
+    } else {
+      auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(() => {
+          navigation.goBack();
+        })
+        .catch((error) => {
+          if (error.code === "auth/wrong-password") {
+            console.log("Wrong password!");
+          }
+
+          if (error.code === "auth/user-not-found") {
+            console.log("User not found!");
+          }
+        });
+    }
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -52,6 +101,7 @@ const SignIn = () => {
           styles.buttonLogin,
           { backgroundColor: type ? "#F53745" : "#57DD86" },
         ]}
+        onPress={handleLogin}
       >
         <Text style={styles.buttonText}>{type ? "Cadastrar" : "Acessar"}</Text>
       </TouchableOpacity>
