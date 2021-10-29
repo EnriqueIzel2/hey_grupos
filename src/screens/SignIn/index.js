@@ -94,6 +94,7 @@ const SignIn = () => {
         onChangeText={(text) => setPassword(text)}
         placeholder="Digite sua senha"
         placeholderTextColor="#99999B"
+        secureTextEntry={true}
       />
 
       <TouchableOpacity
