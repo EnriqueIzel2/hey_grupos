@@ -5,13 +5,14 @@ import {
   View,
   SafeAreaView,
   TouchableOpacity,
-  FlatList,
+  Modal,
 } from "react-native";
 import auth from "@react-native-firebase/auth";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 import FabButton from "../../components/FabButton";
+import ModalNewRoom from "../../components/ModalNewRoom";
 
 const ChatRoom = () => {
   const navigation = useNavigation();
@@ -44,6 +45,10 @@ const ChatRoom = () => {
       </View>
 
       <FabButton setVisible={() => setIsModalVisibel(true)} />
+
+      <Modal visible={isModalVisibel} animationType="fade" transparent={true}>
+        <ModalNewRoom setVisible={() => setIsModalVisibel(false)} />
+      </Modal>
     </SafeAreaView>
   );
 };
