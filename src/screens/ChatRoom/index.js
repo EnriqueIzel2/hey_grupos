@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -11,8 +11,11 @@ import auth from "@react-native-firebase/auth";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
+import FabButton from "../../components/FabButton";
+
 const ChatRoom = () => {
   const navigation = useNavigation();
+  const [isModalVisibel, setIsModalVisibel] = useState(false);
 
   function handleSignOut() {
     auth()
@@ -39,6 +42,8 @@ const ChatRoom = () => {
           <Icon name="search" size={28} color="#FFF" />
         </TouchableOpacity>
       </View>
+
+      <FabButton setVisible={() => setIsModalVisibel(true)} />
     </SafeAreaView>
   );
 };
