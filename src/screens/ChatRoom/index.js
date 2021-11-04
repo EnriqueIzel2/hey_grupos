@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -8,7 +8,7 @@ import {
   Modal,
 } from "react-native";
 import auth from "@react-native-firebase/auth";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useIsFocused } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 import FabButton from "../../components/FabButton";
@@ -16,7 +16,16 @@ import ModalNewRoom from "../../components/ModalNewRoom";
 
 const ChatRoom = () => {
   const navigation = useNavigation();
+  const isFocused = useIsFocused();
+
+  const [user, setUser] = useState(null);
   const [isModalVisibel, setIsModalVisibel] = useState(false);
+
+  useEffect(() => {
+    const hasUser = auth().currentUser ? auth().currentUser.toJSON() : null;
+
+    setUser(hasUser);
+  }, [isFocused]);
 
   function handleSignOut() {
     auth()
@@ -44,7 +53,7 @@ const ChatRoom = () => {
         </TouchableOpacity>
       </View>
 
-      <FabButton setVisible={() => setIsModalVisibel(true)} />
+      <FabButton setVisible={() => setIsModalVisibel(true)} userStatus={user} />
 
       <Modal visible={isModalVisibel} animationType="fade" transparent={true}>
         <ModalNewRoom setVisible={() => setIsModalVisibel(false)} />
