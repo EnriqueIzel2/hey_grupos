@@ -29,6 +29,10 @@ const ModalNewRoom = ({ setVisible }) => {
         <TouchableOpacity style={styles.buttonCreate}>
           <Text style={styles.buttonText}>Criar sala</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity style={styles.backButton} onPress={setVisible}>
+          <Text>Voltar</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -78,6 +82,14 @@ const styles = StyleSheet.create({
     fontSize: 19,
     fontWeight: "bold",
     color: "#fff",
+  },
+
+  backButton: {
+    marginTop: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    width: 80,
+    alignSelf: "center",
   },
 });
 
