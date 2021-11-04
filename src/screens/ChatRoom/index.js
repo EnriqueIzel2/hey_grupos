@@ -31,6 +31,7 @@ const ChatRoom = () => {
     auth()
       .signOut()
       .then(() => {
+        setUser(null);
         navigation.navigate("SignIn");
       })
       .catch((error) => {
@@ -42,9 +43,11 @@ const ChatRoom = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.headerRoom}>
         <View style={styles.headerRoomLeft}>
-          <TouchableOpacity onPress={handleSignOut}>
-            <Icon name="arrow-back" size={28} color="#FFF" />
-          </TouchableOpacity>
+          {user && (
+            <TouchableOpacity onPress={handleSignOut}>
+              <Icon name="arrow-back" size={28} color="#FFF" />
+            </TouchableOpacity>
+          )}
           <Text style={styles.title}>Grupos</Text>
         </View>
 
