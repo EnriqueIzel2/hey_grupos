@@ -17,8 +17,40 @@ const ModalNewRoom = ({ setVisible }) => {
 
   function handleCreateRoom() {
     if (roomName === "") {
-      alert("Please enter a room name");
+      alert("Preencha o campo com o nome do sala");
+      return;
     }
+
+    createRoom();
+  }
+
+  function createRoom() {
+    firestore()
+      .collection("MESSAGE_THREADS")
+      .add({
+        name: roomName,
+        owner: user.uid,
+        lastMessage: {
+          text: `Grupo ${roomName} criado. Bem vindo(a)`,
+          createdAt: firestore.FieldValue.serverTimestamp(),
+        },
+      })
+      .then((docRef) => {
+        docRef
+          .collection("MESSAGES")
+          .add({
+            text: `Grupo ${roomName} criado. Bem vindo(a)`,
+            createdAt: firestore.FieldValue.serverTimestamp(),
+            system: true,
+          })
+          .then(() => {
+            setVisible();
+          });
+      })
+      .catch((error) => {
+        alert("Ocorreu um erro. Tente novamente");
+        console.log(error);
+      });
   }
 
   return (
