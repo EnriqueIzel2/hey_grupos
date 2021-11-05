@@ -7,9 +7,19 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
 } from "react-native";
+import firestore from "@react-native-firebase/firestore";
+import auth from "@react-native-firebase/auth";
 
 const ModalNewRoom = ({ setVisible }) => {
   const [roomName, setRoomName] = useState("");
+
+  const user = auth().currentUser.toJSON();
+
+  function handleCreateRoom() {
+    if (roomName === "") {
+      alert("Please enter a room name");
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -26,7 +36,10 @@ const ModalNewRoom = ({ setVisible }) => {
           placeholder="Nome para sua sala"
         />
 
-        <TouchableOpacity style={styles.buttonCreate}>
+        <TouchableOpacity
+          style={styles.buttonCreate}
+          onPress={handleCreateRoom}
+        >
           <Text style={styles.buttonText}>Criar sala</Text>
         </TouchableOpacity>
 
