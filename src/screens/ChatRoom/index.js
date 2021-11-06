@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Modal,
+  ActivityIndicator,
 } from "react-native";
 import auth from "@react-native-firebase/auth";
 import firestore from "@react-native-firebase/firestore";
@@ -75,6 +76,14 @@ const ChatRoom = () => {
       });
   }
 
+  if (loading) {
+    return (
+      <View style={styles.loading}>
+        <ActivityIndicator size="large" color="#00ff" />
+      </View>
+    );
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerRoom}>
@@ -104,6 +113,12 @@ const ChatRoom = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+
+  loading: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   headerRoom: {
