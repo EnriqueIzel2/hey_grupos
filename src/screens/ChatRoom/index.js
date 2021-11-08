@@ -21,6 +21,7 @@ import ChatList from "../../components/ChatList";
 const ChatRoom = () => {
   const navigation = useNavigation();
   const isFocused = useIsFocused();
+  const [updateScreen, setUpdateScreen] = useState(false);
 
   const [user, setUser] = useState(null);
   const [isModalVisibel, setIsModalVisibel] = useState(false);
@@ -64,7 +65,7 @@ const ChatRoom = () => {
     return () => {
       isActive = false;
     };
-  }, [isFocused]);
+  }, [isFocused, updateScreen]);
 
   function handleSignOut() {
     auth()
@@ -113,7 +114,10 @@ const ChatRoom = () => {
       <FabButton setVisible={() => setIsModalVisibel(true)} userStatus={user} />
 
       <Modal visible={isModalVisibel} animationType="fade" transparent={true}>
-        <ModalNewRoom setVisible={() => setIsModalVisibel(false)} />
+        <ModalNewRoom
+          setVisible={() => setIsModalVisibel(false)}
+          setUpdateScreen={() => setUpdateScreen(!updateScreen)}
+        />
       </Modal>
     </SafeAreaView>
   );
