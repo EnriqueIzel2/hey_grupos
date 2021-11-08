@@ -64,6 +64,7 @@ const ChatRoom = () => {
 
     return () => {
       isActive = false;
+      setUpdateScreen(!updateScreen);
     };
   }, [isFocused, updateScreen]);
 
