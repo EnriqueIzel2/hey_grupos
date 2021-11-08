@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Modal,
   ActivityIndicator,
+  FlatList,
 } from "react-native";
 import auth from "@react-native-firebase/auth";
 import firestore from "@react-native-firebase/firestore";
@@ -15,6 +16,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 
 import FabButton from "../../components/FabButton";
 import ModalNewRoom from "../../components/ModalNewRoom";
+import ChatList from "../../components/ChatList";
 
 const ChatRoom = () => {
   const navigation = useNavigation();
@@ -101,6 +103,13 @@ const ChatRoom = () => {
         </TouchableOpacity>
       </View>
 
+      <FlatList
+        data={threads}
+        keyExtractor={(item) => item._id}
+        showsVerticalScrollIndicator={false}
+        renderItem={({ item }) => <ChatList data={item} />}
+      />
+
       <FabButton setVisible={() => setIsModalVisibel(true)} userStatus={user} />
 
       <Modal visible={isModalVisibel} animationType="fade" transparent={true}>
@@ -113,6 +122,7 @@ const ChatRoom = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#FFF",
   },
 
   loading: {
