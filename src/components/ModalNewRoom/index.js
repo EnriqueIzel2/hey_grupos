@@ -6,12 +6,14 @@ import {
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
+  ActivityIndicator,
 } from "react-native";
 import firestore from "@react-native-firebase/firestore";
 import auth from "@react-native-firebase/auth";
 
 const ModalNewRoom = ({ setVisible, setUpdateScreen }) => {
   const [roomName, setRoomName] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const user = auth().currentUser.toJSON();
 
@@ -20,6 +22,8 @@ const ModalNewRoom = ({ setVisible, setUpdateScreen }) => {
       alert("Preencha o campo com o nome do sala");
       return;
     }
+
+    setLoading(true);
 
     createRoom();
   }
@@ -46,6 +50,7 @@ const ModalNewRoom = ({ setVisible, setUpdateScreen }) => {
           .then(() => {
             setVisible();
             setUpdateScreen();
+            setLoading(false);
           });
       })
       .catch((error) => {
@@ -73,7 +78,11 @@ const ModalNewRoom = ({ setVisible, setUpdateScreen }) => {
           style={styles.buttonCreate}
           onPress={handleCreateRoom}
         >
-          <Text style={styles.buttonText}>Criar sala</Text>
+          {loading ? (
+            <ActivityIndicator size="large" color="#fff" />
+          ) : (
+            <Text style={styles.buttonText}>Criar Sala</Text>
+          )}
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.backButton} onPress={setVisible}>
