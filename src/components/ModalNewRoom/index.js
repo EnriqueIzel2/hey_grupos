@@ -23,9 +23,29 @@ const ModalNewRoom = ({ setVisible, setUpdateScreen }) => {
       return;
     }
 
-    setLoading(true);
+    firestore()
+      .collection("MESSAGE_THREADS")
+      .get()
+      .then((snapshot) => {
+        let myThreads = 0;
 
-    createRoom();
+        snapshot.docs.map((docItem) => {
+          if (docItem.data().owner === user.uid) {
+            myThreads++;
+          }
+        });
+
+        if (myThreads >= 4) {
+          alert("Você atingiu o limite de salas criadas");
+        } else {
+          setLoading(true);
+
+          createRoom();
+        }
+      })
+      .catch((error) => {
+        alert("Ocorreu um erro. Tente novamente");
+      });
   }
 
   function createRoom() {
