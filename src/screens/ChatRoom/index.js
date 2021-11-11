@@ -8,6 +8,7 @@ import {
   Modal,
   ActivityIndicator,
   FlatList,
+  Alert,
 } from "react-native";
 import auth from "@react-native-firebase/auth";
 import firestore from "@react-native-firebase/firestore";
@@ -80,6 +81,28 @@ const ChatRoom = () => {
       });
   }
 
+  async function handleDeleteRoom(roomId) {
+    await firestore().collection("MESSAGE_THREADS").doc(roomId).delete();
+
+    setUpdateScreen(!updateScreen);
+  }
+
+  function deleteRoom(ownerId, roomId) {
+    if (ownerId !== user?.uid) return;
+
+    Alert.alert("Atenção", "Você tem certeza que deseja deletar essa sala?", [
+      {
+        text: "Cancelar",
+        onPress: () => {},
+        style: "cancel",
+      },
+      {
+        text: "Deletar",
+        onPress: () => handleDeleteRoom(roomId),
+      },
+    ]);
+  }
+
   if (loading) {
     return (
       <View style={styles.loading}>
@@ -109,7 +132,12 @@ const ChatRoom = () => {
         data={threads}
         keyExtractor={(item) => item._id}
         showsVerticalScrollIndicator={false}
-        renderItem={({ item }) => <ChatList data={item} />}
+        renderItem={({ item }) => (
+          <ChatList
+            data={item}
+            deleteRoom={() => deleteRoom(item.owner, item._id)}
+          />
+        )}
       />
 
       <FabButton setVisible={() => setIsModalVisibel(true)} userStatus={user} />
