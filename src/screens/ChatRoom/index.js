@@ -81,13 +81,13 @@ const ChatRoom = () => {
       });
   }
 
-  async function handleDeleteRoom(roomId) {
+  async function deleteRoom(roomId) {
     await firestore().collection("MESSAGE_THREADS").doc(roomId).delete();
 
     setUpdateScreen(!updateScreen);
   }
 
-  function deleteRoom(ownerId, roomId) {
+  function handleDeleteRoom(ownerId, roomId) {
     if (ownerId !== user?.uid) return;
 
     Alert.alert("Atenção", "Você tem certeza que deseja deletar essa sala?", [
@@ -98,7 +98,7 @@ const ChatRoom = () => {
       },
       {
         text: "Deletar",
-        onPress: () => handleDeleteRoom(roomId),
+        onPress: () => deleteRoom(roomId),
       },
     ]);
   }
@@ -135,7 +135,7 @@ const ChatRoom = () => {
         renderItem={({ item }) => (
           <ChatList
             data={item}
-            deleteRoom={() => deleteRoom(item.owner, item._id)}
+            deleteRoom={() => handleDeleteRoom(item.owner, item._id)}
           />
         )}
       />
