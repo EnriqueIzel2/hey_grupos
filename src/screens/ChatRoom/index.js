@@ -136,6 +136,7 @@ const ChatRoom = () => {
           <ChatList
             data={item}
             deleteRoom={() => handleDeleteRoom(item.owner, item._id)}
+            userStatus={user}
           />
         )}
       />
