@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Text, View } from "react-native";
+import { Text, View, FlatList, SafeAreaView, StyleSheet } from "react-native";
 import auth from "@react-native-firebase/auth";
 import firestore from "@react-native-firebase/firestore";
+import ChatMessage from "../../components/ChatMessage";
 
 const Messages = ({ route }) => {
   const { thread } = route.params;
@@ -41,10 +42,23 @@ const Messages = ({ route }) => {
   }, []);
 
   return (
-    <View>
-      <Text>Mensagens tops</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        style={{ width: "100%" }}
+        data={messages}
+        keyExtractor={(item) => item._id}
+        renderItem={({ item }) => <ChatMessage data={item} />}
+      />
+    </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
 
 export default Messages;
