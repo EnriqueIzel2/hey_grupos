@@ -10,7 +10,9 @@ Aplicativo onde você pode encontrar e criar grupos de estudo sobre qualquer ass
 <strong>Opa, ainda estamos trabalhando nisso</strong> 🚧 👷‍♂️
 </p>
 
-<img align="center" src="https://media.giphy.com/media/nGMnDqebzDcfm/giphy.gif" />
+<div align="center">
+<img src="https://media.giphy.com/media/nGMnDqebzDcfm/giphy.gif" />
+</div>
 
 <!-- <p aling="center">
   <a href="#fearures">Features</a> •
