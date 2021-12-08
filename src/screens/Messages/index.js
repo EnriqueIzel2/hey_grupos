@@ -55,9 +55,7 @@ const Messages = ({ route }) => {
   }, []);
 
   async function handleSendMessage() {
-    console.log("handleSendMessage");
     if (input.length <= 0) {
-      console.log("campo vazio");
       return;
     }
 
