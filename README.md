@@ -1,6 +1,8 @@
 <h1 align="center">Hey Grupos</h1>
 
+<p align="center">
 Aplicativo onde você pode encontrar e criar grupos de estudo sobre qualquer assunto. 📖 📚
+</p>
 
 ---
 
@@ -8,7 +10,7 @@ Aplicativo onde você pode encontrar e criar grupos de estudo sobre qualquer ass
 <strong>Opa, ainda estamos trabalhando nisso</strong> 🚧 👷‍♂️
 </p>
 
-![um gif](https://media.giphy.com/media/nGMnDqebzDcfm/giphy.gif)
+<img align="center" src="https://media.giphy.com/media/nGMnDqebzDcfm/giphy.gif" />
 
 <!-- <p aling="center">
   <a href="#fearures">Features</a> •
