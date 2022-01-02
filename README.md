@@ -6,7 +6,7 @@ Aplicativo onde você pode encontrar e criar grupos de estudo sobre qualquer ass
 
 ---
 
- <p aling="center">
+ <p align="center">
   <a href="#demonstracao">Demonstração</a> •
   <a href="#features">Features</a> •
   <a href="#pre-requisitos">Pré-Requisitos</a> •
