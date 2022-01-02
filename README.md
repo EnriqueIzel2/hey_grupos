@@ -12,20 +12,25 @@ Aplicativo onde você pode encontrar e criar grupos de estudo sobre qualquer ass
   <a href="#pre-requisitos">Pré-Requisitos</a> •
   <a href="#rodando-projeto">Rodando o Projeto</a> •
   <a href="#tecnologias">Tecnologias</a> •
-  <a href="#Autor">Autor</a>
+  <a href="#autor">Autor</a>
 </p>
 
 ---
 
 <h2 id="demonstracao">📽️ Demonstração</h2>
 
+<p align="center">
+  <img src="https://media2.giphy.com/media/g9AvNTuWRd14Ix1stc/giphy.gif" />
+</p>
+
 ---
 
-## 🚀 Features
+<h2 id="features">🚀 Features</h2>
 
 - [x] Cadastro e Login de usuário;
 - [x] Criação de salas de conversa;
 - [x] Exclusão de sala;
+- [x] Buscar por sala;
 - [x] Envio de mensagem;
 
 ---
@@ -89,7 +94,7 @@ As seguintes tecnologias foram usadas nesse projeto:
 
 ---
 
-<h2>👨 Autor</h2>
+<h2 id="autor">👨 Autor</h2>
 
 <a href="https://github.com/EnriqueIzel2">
  <img style="border-radius: 50%;" src="https://avatars3.githubusercontent.com/u/26115700?s=460&u=61b426b901b8fe02e12019b1fdb67bf0072d4f00&v=4" width="100px;" alt=""/>
